@@ -1,47 +1,35 @@
 import React from 'react';
 
-const ProjectItem = ({ title, description, tools, technologies, sectionId, onClick }) => {
+const ProjectItem = ({ title, description, category, year, highlights, stack, image }) => {
   return (
-    <button onClick={onClick} style={projectItemStyle}>
-      <div style={projectItemInnerStyle}>
+    <article className="project-card">
+      <div className="project-media" aria-label={`${title} preview`}>
+        {image ? <img src={image} alt={`${title} preview`} /> : <span>Project Preview</span>}
+      </div>
+
+      <div className="project-content">
+        <div className="project-header">
+          <span className="project-tag">{category}</span>
+          <span className="project-year">{year}</span>
+        </div>
+
         <h3>{title}</h3>
         <p>{description}</p>
-        <div style={detailsStyle}>
-          <span><strong>Tools:</strong> {tools.join(', ')}</span>
-          <span><strong>Technologies:</strong> {technologies.join(', ')}</span>
+
+        <ul className="project-points">
+          {highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+
+        <div className="tech-list">
+          {stack.map((tech) => (
+            <span key={tech}>{tech}</span>
+          ))}
         </div>
       </div>
-    </button>
+    </article>
   );
-};
-
-
-const projectItemStyle = {
-  padding: '1rem',
-  width: '200px', // Set a fixed width
-  height: '200px', // Set a fixed height
-  backgroundColor: '#444',
-  borderRadius: '5px',
-  color: '#fff',
-  border: 'none',
-  cursor: 'pointer',
-  boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)', // Increased shadow blur and spread
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-};
-
-
-const projectItemInnerStyle = {
-  padding: '0.5rem',
-  textAlign: 'center'
-};
-
-const detailsStyle = {
-  marginTop: '0.5rem',
-  fontSize: '0.9em',
-  color: '#ddd'
 };
 
 export default ProjectItem;
